@@ -80,8 +80,7 @@ terraform apply
 ```bash 
 kubectl apply -f k8s/
 
-```
-
+```bash 
 deploy:
   stage: deploy
   image: bitnami/kubectl:latest
@@ -89,6 +88,7 @@ deploy:
     - aws eks update-kubeconfig --region us-east-1 --name event-cluster
     - kubectl apply -f k8s/
 ```
+
 
 ## 📈 Monitoring and Observability
 Amazon CloudWatch – Monitors queue metrics
