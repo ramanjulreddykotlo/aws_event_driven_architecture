@@ -81,6 +81,7 @@ terraform apply
 ```bash
  
 kubectl apply -f k8s/
+```
 
 ```bash 
 deploy:
