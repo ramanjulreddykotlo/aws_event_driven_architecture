@@ -8,18 +8,7 @@ This repository showcases a cloud-native event-driven architecture on AWS using 
 
 ## Architecture Overview
 
-insert image here 
-
-[ Producer ]
-⬇
-[ Amazon SQS Queue ]
-⬇
-[ EKS Cluster with KEDA ]
-⬇
-[ Auto-scaled Worker Pods ]
-⬇
-[ Observability: Prometheus + Grafana + CloudWatch ]
-
+![alt text](https://blog.codeship.com/running-services-within-docker-swarm/)
 
 
 - **Terraform** provisions VPC, EKS, IAM, and SQS.
