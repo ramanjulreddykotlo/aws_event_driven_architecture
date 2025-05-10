@@ -8,7 +8,9 @@ This repository showcases a cloud-native event-driven architecture on AWS using 
 
 ## Architecture Overview
 
-![alt text](https://blog.codeship.com/running-services-within-docker-swarm/)
+
+![aws event-drvien-Diagram](https://github.com/user-attachments/assets/7c7a1ed9-0347-479e-a99d-ab7a4ec22fde)
+
 
 
 - **Terraform** provisions VPC, EKS, IAM, and SQS.
