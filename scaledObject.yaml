@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: order-processor-scaler
+spec:
+  scaleTargetRef:
+    name: order-processor
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  pollingInterval: 15
+  cooldownPeriod: 30
+  triggers:
+  - type: aws-sqs-queue
+    metadata:
+      queueURL: https://sqs.eu-west-1.amazonaws.com/123456789012/order-processing-queue
+      queueLength: "5"
+      activationQueueLength: "2"
+      awsRegion: "eu-west-1"
+      identityOwner: pod
