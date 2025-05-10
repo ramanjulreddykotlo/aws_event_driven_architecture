@@ -1,0 +1,50 @@
+# This is a Sample GitLab CI/CD configuration file for kubernetes deployment.
+
+stages:
+  - predeploy
+  - build
+  - scan
+  - deploy
+
+predeploy_checks:
+  image: ami/kubectl:latest
+  stage: predeploy
+  script:
+    - echo "Running pre-deployment checks..."
+    - kubectl version --client
+    - kubectl get nodes
+  only:
+    - main
+
+build_image:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - echo "Building Docker image..."
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  only:
+    - main
+
+scan_image:
+  image: aquasec/trivy:latest
+  stage: scan
+  script:
+    - echo "Scanning Docker image for vulnerabilities..."
+    - trivy image $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  only:
+    - main
+
+deploy_to_eks:
+  image: ami/kubectl:latest
+  stage: deploy
+  before_script:
+    - apk add --no-cache curl jq python3 py3-pip
+    - pip install awscli
+    - aws eks update-kubeconfig --region $AWS_REGION --name your-eks-cluster-name
+  script:
+    - kubectl apply -f k8s/
+  only:
+    - main

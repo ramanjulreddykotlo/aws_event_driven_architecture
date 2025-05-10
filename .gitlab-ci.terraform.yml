@@ -1,0 +1,38 @@
+# This is a GitLab CI/CD configuration file for deploying Terraform infrastructure. 
+stages:
+  - init
+  - plan
+  - apply
+
+variables:
+  TF_WORKING_DIR: "terraform"
+  TF_STATE_BUCKET: "your-s3-bucket"
+  TF_REGION: "us-east-1"
+
+terraform_init:
+  image: hashicorp/terraform:1.5.6
+  stage: init
+  before_script:
+    - cd $TF_WORKING_DIR
+  script:
+    - terraform init -backend-config="bucket=$TF_STATE_BUCKET" -backend-config="region=$TF_REGION"
+
+terraform_plan:
+  image: hashicorp/terraform:1.5.6
+  stage: plan
+  before_script:
+    - cd $TF_WORKING_DIR
+  script:
+    - terraform plan -out=tfplan
+  artifacts:
+    paths:
+      - terraform/tfplan
+
+terraform_apply:
+  image: hashicorp/terraform:1.5.6
+  stage: apply
+  before_script:
+    - cd $TF_WORKING_DIR
+  script:
+    - terraform apply -auto-approve tfplan
+  when: manual

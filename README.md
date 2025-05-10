@@ -91,10 +91,6 @@ kubectl apply -f k8s/
 
 ```
 
-## 🔄 CI/CD Pipeline (.gitlab-ci.yml)
-
-```yaml
-
 deploy:
   stage: deploy
   image: bitnami/kubectl:latest
