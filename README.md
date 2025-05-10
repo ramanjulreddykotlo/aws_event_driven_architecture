@@ -8,17 +8,8 @@ This repository showcases a cloud-native event-driven architecture on AWS using 
 
 ## Architecture Overview
 
-insert image here 
 
-[ Producer ]
-⬇
-[ Amazon SQS Queue ]
-⬇
-[ EKS Cluster with KEDA ]
-⬇
-[ Auto-scaled Worker Pods ]
-⬇
-[ Observability: Prometheus + Grafana + CloudWatch ]
+![aws event-drvien-Diagram](https://github.com/user-attachments/assets/7c7a1ed9-0347-479e-a99d-ab7a4ec22fde)
 
 
 
