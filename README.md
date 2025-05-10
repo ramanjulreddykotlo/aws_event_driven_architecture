@@ -77,7 +77,9 @@ terraform apply
 ```
 
 ## ☸️ Kubernetes App Deployment
-```bash 
+
+```bash
+ 
 kubectl apply -f k8s/
 
 ```bash 
